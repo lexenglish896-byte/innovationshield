@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>وكالة درع الإبتكار | للحلول التقنية والتسويقية</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Cairo & Tajawal -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800;900&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome CDN for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            dark: '#080E1E',
+                            navy: '#121D38',
+                            blue: '#25355A',
+                            gold: '#F59E0B',
+                            goldHover: '#D97706',
+                            emerald: '#10B981',
+                            whatsapp: '#25D366'
+                        }
+                    },
+                    fontFamily: {
+                        cairo: ['Cairo', 'sans-serif'],
+                        tajawal: ['Tajawal', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        body {
+            font-family: 'Cairo', sans-serif;
+            scroll-behavior: smooth;
+        }
+        .gradient-text {
+            background: linear-gradient(135deg, #F59E0B 0%, #10B981 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .hero-bg {
+            background: radial-gradient(circle at top right, #121D38 0%, #080E1E 100%);
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        /* Custom scrollbar for control modal */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 flex flex-col min-h-screen relative">
+
+    <!-- Header / Navbar -->
+    <header class="sticky top-0 z-40 bg-brand-dark/95 backdrop-blur-md border-b border-slate-800 text-white transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Logo -->
+                <div class="flex items-center gap-3 cursor-pointer" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+                    <div class="w-12 h-12 rounded-xl bg-gradient-to-tr from-brand-emerald to-brand-gold flex items-center justify-center shadow-lg shadow-brand-emerald/20">
+                        <i class="fa-solid fa-shield-halved text-brand-dark text-2xl"></i>
+                    </div>
+                    <div>
+                        <span class="text-2xl font-black tracking-wide block leading-none">درع <span class="text-brand-gold">الإبتكار</span></span>
+                        <span class="text-xs text-slate-400 font-light tracking-widest mt-1 block">INNOVATION SHIELD AGENCY</span>
+                    </div>
+                </div>
+
+                <!-- Desktop Menu -->
+                <nav class="hidden md:flex items-center space-x-1 space-x-reverse font-semibold">
+                    <a href="#home" class="px-4 py-2 rounded-lg text-brand-gold hover:bg-slate-800/60 transition">الرئيسية</a>
+                    <a href="#services" class="px-4 py-2 rounded-lg text-slate-300 hover:text-white hover:bg-slate-800/60 transition">خدماتنا ومنتجاتنا</a>
+                    <a href="#about" class="px-4 py-2 rounded-lg text-slate-300 hover:text-white hover:bg-slate-800/60 transition">عن الوكالة</a>
+                    <a href="#faq" class="px-4 py-2 rounded-lg text-slate-300 hover:text-white hover:bg-slate-800/60 transition">الأسئلة الشائعة</a>
+                    <a href="#contact" class="px-4 py-2 rounded-lg text-slate-300 hover:text-white hover:bg-slate-800/60 transition">اتصل بنا</a>
+                </nav>
+
+                <!-- Actions: Admin Edit Panel Button & Mobile Menu -->
+                <div class="flex items-center gap-3">
+                    <button onclick="openAdminModal()" title="إدارة الخدمات والتعديل" class="px-3.5 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-brand-gold hover:text-white transition flex items-center gap-2 text-sm border border-slate-700 shadow-sm">
+                        <i class="fa-solid fa-pen-to-square"></i>
+                        <span class="font-bold hidden sm:inline">لوحة التحكم والتعديل</span>
+                    </button>
+                    <button id="mobile-menu-btn" onclick="toggleMobileMenu()" class="md:hidden p-2 rounded-lg text-slate-300 hover:text-white focus:outline-none">
+                        <i class="fa-solid fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobile-menu" class="hidden md:hidden bg-brand-navy border-t border-slate-800 px-4 pt-2 pb-6 space-y-2">
+            <a href="#home" onclick="toggleMobileMenu()" class="block px-3 py-2 rounded-md text-brand-gold font-medium">الرئيسية</a>
+            <a href="#services" onclick="toggleMobileMenu()" class="block px-3 py-2 rounded-md text-slate-300 hover:text-white hover:bg-slate-800">خدماتنا ومنتجاتنا</a>
+            <a href="#about" onclick="toggleMobileMenu()" class="block px-3 py-2 rounded-md text-slate-300 hover:text-white hover:bg-slate-800">عن الوكالة</a>
+            <a href="#faq" onclick="toggleMobileMenu()" class="block px-3 py-2 rounded-md text-slate-300 hover:text-white hover:bg-slate-800">الأسئلة الشائعة</a>
+            <a href="#contact" onclick="toggleMobileMenu()" class="block px-3 py-2 rounded-md text-slate-300 hover:text-white hover:bg-slate-800">اتصل بنا</a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-bg text-white py-20 lg:py-28 relative overflow-hidden">
+        <div class="absolute -top-24 -left-24 w-96 h-96 bg-brand-emerald/10 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="absolute -bottom-24 -right-24 w-96 h-96 bg-brand-gold/10 rounded-full blur-3xl pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center lg:text-right">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div class="space-y-6">
+                    <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-slate-800/80 border border-slate-700 text-brand-emerald text-sm font-semibold">
+                        <i class="fa-solid fa-wand-magic-sparkles"></i>
+                        <span>حلول إبداعية لمستقبل أعمالك</span>
+                    </div>
+                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-tight">
+                        نحوّل أفكارك إلى <span class="gradient-text">واقع رقمي متميز</span>
+                    </h1>
+                    <p class="text-slate-300 text-lg leading-relaxed max-w-2xl font-tajawal">
+                        وكالة **درع الإبتكار** تقدم أفضل الحلول البرمجية والتسويقية والتصميمية. اختر الخدمة واطلبها مباشرة عبر الواتساب لمعرفة كافة التفاصيل والأسعار.
+                    </p>
+                    <div class="flex flex-wrap gap-4 justify-center lg:justify-start pt-4">
+                        <a href="#services" class="px-8 py-4 rounded-xl bg-gradient-to-r from-brand-emerald to-emerald-600 text-brand-dark font-bold text-lg hover:shadow-lg hover:shadow-brand-emerald/30 transform hover:-translate-y-1 transition duration-200">
+                            استكشف خدماتنا <i class="fa-solid fa-arrow-left mr-2"></i>
+                        </a>
+                        <button onclick="orderGeneralWhatsApp()" class="px-8 py-4 rounded-xl bg-brand-whatsapp text-white font-bold text-lg hover:bg-emerald-600 transition duration-200 flex items-center gap-2 shadow-lg shadow-emerald-900/30">
+                            <i class="fa-brands fa-whatsapp text-2xl"></i>
+                            <span>تواصل مباشر للطلب</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Hero Graphic Card -->
+                <div class="relative flex justify-center">
+                    <div class="w-full max-w-md glass-card p-8 rounded-3xl border border-slate-700/50 shadow-2xl space-y-6">
+                        <div class="flex items-center justify-between border-b border-slate-800 pb-4">
+                            <span class="text-slate-400 text-sm"><i class="fa-solid fa-circle text-emerald-500 text-xs ml-1"></i> الرقم المباشر للطلب</span>
+                            <span class="text-brand-gold font-mono font-bold text-sm" dir="ltr">+966 54 461 3929</span>
+                        </div>
+                        <div class="space-y-4">
+                            <div class="flex items-center gap-4 p-3 rounded-xl bg-slate-800/50">
+                                <div class="w-10 h-10 rounded-lg bg-blue-500/20 text-blue-400 flex items-center justify-center">
+                                    <i class="fa-solid fa-laptop-code text-xl"></i>
+                                </div>
+                                <div class="text-right">
+                                    <h4 class="font-bold text-sm">تطوير المواقع والمتاجر</h4>
+                                    <p class="text-xs text-slate-400">أحدث التقنيات البرمجية</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-4 p-3 rounded-xl bg-slate-800/50">
+                                <div class="w-10 h-10 rounded-lg bg-emerald-500/20 text-emerald-400 flex items-center justify-center">
+                                    <i class="fa-solid fa-chart-line text-xl"></i>
+                                </div>
+                                <div class="text-right">
+                                    <h4 class="font-bold text-sm">التسويق والحملات الإعلانية</h4>
+                                    <p class="text-xs text-slate-400">نتائج سريعة ومستهدفة</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-4 p-3 rounded-xl bg-slate-800/50">
+                                <div class="w-10 h-10 rounded-lg bg-amber-500/20 text-amber-400 flex items-center justify-center">
+                                    <i class="fa-solid fa-pen-nib text-xl"></i>
+                                </div>
+                                <div class="text-right">
+                                    <h4 class="font-bold text-sm">تصميم الهويات والبصريات</h4>
+                                    <p class="text-xs text-slate-400">تصاميم ابتكارية احترافية</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-20 bg-slate-100 flex-grow">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Section Header -->
+            <div class="text-center max-w-3xl mx-auto mb-12">
+                <span class="text-emerald-600 font-bold tracking-wider text-sm block mb-2">خدماتنا ومنتجاتنا</span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900">اختر خدمتك واطلبها بضغطة زر</h2>
+                <div class="w-20 h-1 bg-gradient-to-r from-brand-emerald to-brand-gold mx-auto my-4 rounded-full"></div>
+                <p class="text-slate-600 text-base font-tajawal">
+                    تصفح الكتالوج أدناه، واضغط زر <strong class="text-emerald-700">"اطلب الآن"</strong> للتواصل المباشر مع الوكالة عبر الواتساب على الرقم الموحد <span dir="ltr" class="font-bold font-mono">966544613929</span>.
+                </p>
+            </div>
+
+            <!-- Filter Categories -->
+            <div class="flex flex-wrap items-center justify-center gap-2 sm:gap-4 mb-12" id="filter-tabs">
+                <button onclick="filterServices('all')" class="filter-btn active-tab px-6 py-2.5 rounded-xl font-bold text-sm transition-all duration-200 bg-brand-dark text-white shadow-md" data-category="all">
+                    الكل
+                </button>
+                <button onclick="filterServices('tech')" class="filter-btn px-6 py-2.5 rounded-xl font-bold text-sm transition-all duration-200 bg-white text-slate-700 hover:bg-slate-200 shadow-sm" data-category="tech">
+                    <i class="fa-solid fa-code ml-2 text-blue-500"></i>الحلول التقنية
+                </button>
+                <button onclick="filterServices('marketing')" class="filter-btn px-6 py-2.5 rounded-xl font-bold text-sm transition-all duration-200 bg-white text-slate-700 hover:bg-slate-200 shadow-sm" data-category="marketing">
+                    <i class="fa-solid fa-bullhorn ml-2 text-emerald-500"></i>التسويق الرقمي
+                </button>
+                <button onclick="filterServices('design')" class="filter-btn px-6 py-2.5 rounded-xl font-bold text-sm transition-all duration-200 bg-white text-slate-700 hover:bg-slate-200 shadow-sm" data-category="design">
+                    <i class="fa-solid fa-palette ml-2 text-amber-500"></i>التصميم والهوية
+                </button>
+                <button onclick="filterServices('products')" class="filter-btn px-6 py-2.5 rounded-xl font-bold text-sm transition-all duration-200 bg-white text-slate-700 hover:bg-slate-200 shadow-sm" data-category="products">
+                    <i class="fa-solid fa-box-open ml-2 text-purple-500"></i>منتجات جاهزة
+                </button>
+            </div>
+
+            <!-- Services Grid Dynamic Display -->
+            <div id="services-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Dynamically rendered via JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-white border-t border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div>
+                    <div class="relative">
+                        <div class="w-full h-80 sm:h-96 bg-brand-dark rounded-3xl overflow-hidden shadow-2xl relative flex items-center justify-center p-8">
+                            <div class="absolute inset-0 bg-gradient-to-tr from-brand-navy to-slate-900 opacity-90"></div>
+                            <div class="relative z-10 text-center space-y-4">
+                                <div class="w-20 h-20 mx-auto rounded-2xl bg-brand-gold/20 flex items-center justify-center text-brand-gold text-4xl border border-brand-gold/30">
+                                    <i class="fa-solid fa-shield-halved"></i>
+                                </div>
+                                <h3 class="text-2xl font-bold text-white">وكالة درع الإبتكار</h3>
+                                <p class="text-slate-300 font-tajawal text-sm max-w-md">شريكك المعتمد للتسويق والحلول البرمجية المتكاملة.</p>
+                                <span class="inline-block px-4 py-1.5 rounded-full bg-emerald-500/20 text-brand-emerald text-xs font-mono font-bold" dir="ltr">+966 54 461 3929</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="space-y-6">
+                    <span class="text-brand-emerald font-bold text-sm tracking-wider">عن درع الإبتكار</span>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 leading-tight">
+                        نقدم الجودة والابتكار لخدمة نجاح مشروعك
+                    </h2>
+                    <p class="text-slate-600 leading-relaxed font-tajawal">
+                        نعمل في **وكالة درع الإبتكار** برؤية واضحة تهدف لتقديم حلول متكاملة تضمن لك تحقيق أفضل العوائد والاستفادة الكبيرة من التواجد الرقمي.
+                    </p>
+
+                    <div class="grid grid-cols-2 gap-4 pt-4">
+                        <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200">
+                            <h4 class="text-2xl font-black text-brand-dark">+180</h4>
+                            <p class="text-xs text-slate-500 font-semibold mt-1">عميل ومشروع محقق</p>
+                        </div>
+                        <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200">
+                            <h4 class="text-2xl font-black text-brand-dark">100%</h4>
+                            <p class="text-xs text-slate-500 font-semibold mt-1">تواصل وخدمة فورية</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="py-20 bg-slate-50">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <span class="text-brand-emerald font-bold text-sm block mb-2">إجابات سريعة</span>
+                <h2 class="text-3xl font-extrabold text-slate-900">الأسئلة الشائعة</h2>
+                <div class="w-16 h-1 bg-brand-gold mx-auto my-3 rounded-full"></div>
+            </div>
+
+            <div class="space-y-4" id="faq-container">
+                <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm cursor-pointer" onclick="toggleFaq(this)">
+                    <div class="flex justify-between items-center">
+                        <h3 class="font-bold text-slate-900 text-lg">كيف أستعلم عن سعر خدمة محددة؟</h3>
+                        <i class="fa-solid fa-chevron-down text-slate-400 transition-transform duration-200"></i>
+                    </div>
+                    <p class="text-slate-600 mt-3 font-tajawal hidden leading-relaxed">
+                        ببساطة قم باختيار الخدمة من قائمة الخدمات والتصنيفات في الأعلى، واضغط على زر **"اطلب الآن"**. سيفتح متصفحك الواتساب المباشر مع رسالة معدّة مسبقاً وسيرد عليك ممثل الوكالة فوراً بالسعر والتفاصيل.
+                    </p>
+                </div>
+
+                <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm cursor-pointer" onclick="toggleFaq(this)">
+                    <div class="flex justify-between items-center">
+                        <h3 class="font-bold text-slate-900 text-lg">كيف يمكنني تغيير الصور أو تعديل الخدمات في الموقع؟</h3>
+                        <i class="fa-solid fa-chevron-down text-slate-400 transition-transform duration-200"></i>
+                    </div>
+                    <p class="text-slate-600 mt-3 font-tajawal hidden leading-relaxed">
+                        من خلال الضغط على زر **"لوحة التحكم والتعديل"** في أعلى الصفحة، يمكنك تغيير صورة أي خدمة بوضع رابط الصورة المطلوب، تعديل اسمها، وصفها، سعرها، أو حتى إضافة خدمات جديدة بسهولة وحفظها مباشرة.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer id="contact" class="bg-brand-dark text-white pt-16 pb-8 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12 pb-12 border-b border-slate-800">
+                <!-- Col 1 -->
+                <div class="space-y-4">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-emerald to-brand-gold flex items-center justify-center">
+                            <i class="fa-solid fa-shield-halved text-brand-dark text-xl"></i>
+                        </div>
+                        <span class="text-2xl font-black">درع <span class="text-brand-gold">الإبتكار</span></span>
+                    </div>
+                    <p class="text-slate-400 text-sm font-tajawal leading-relaxed">
+                        وكالة متخصصة في ابتكار الحلول التسويقية والتقنية المتميزة لتطوير مشروعك وزيادة أرباحك.
+                    </p>
+                </div>
+
+                <!-- Col 2 -->
+                <div class="space-y-4">
+                    <h4 class="text-lg font-bold text-brand-gold">روابط سريعة</h4>
+                    <ul class="space-y-2 text-sm text-slate-300 font-tajawal">
+                        <li><a href="#home" class="hover:text-brand-emerald transition">الرئيسية</a></li>
+                        <li><a href="#services" class="hover:text-brand-emerald transition">الخدمات والمنتجات</a></li>
+                        <li><a href="#about" class="hover:text-brand-emerald transition">عن الوكالة</a></li>
+                        <li><a href="#faq" class="hover:text-brand-emerald transition">الأسئلة الشائعة</a></li>
+                    </ul>
+                </div>
+
+                <!-- Col 3: Direct WhatsApp Info -->
+                <div class="space-y-4">
+                    <h4 class="text-lg font-bold text-brand-gold">رقم الواتساب للطلبات</h4>
+                    <div class="space-y-3 text-sm text-slate-300">
+                        <p class="flex items-center gap-3">
+                            <i class="fa-brands fa-whatsapp text-brand-emerald text-xl"></i>
+                            <span font-mono font-bold text-base dir="ltr" class="text-white">966544613929</span>
+                        </p>
+                        <p class="flex items-center gap-3">
+                            <i class="fa-solid fa-envelope text-brand-emerald"></i>
+                            <span>info@innovationshield.com</span>
+                        </p>
+                    </div>
+                    <button onclick="orderGeneralWhatsApp()" class="w-full mt-2 py-3 px-4 rounded-xl bg-brand-whatsapp text-white font-bold text-sm flex items-center justify-center gap-2 hover:bg-emerald-600 transition shadow-lg shadow-emerald-900/30">
+                        <i class="fa-brands fa-whatsapp text-lg"></i>
+                        <span>تحدث معنا عبر الواتساب</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="pt-8 text-center text-xs text-slate-500 font-tajawal">
+                <p>© 2026 وكالة درع الإبتكار. جميع الحقوق محفوظة.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating WhatsApp Action Button -->
+    <button onclick="orderGeneralWhatsApp()" title="تواصل عبر الواتساب" class="fixed bottom-6 left-6 z-40 w-14 h-14 rounded-full bg-brand-whatsapp text-white flex items-center justify-center text-3xl shadow-2xl hover:scale-110 transition duration-300 border-2 border-white">
+        <i class="fa-brands fa-whatsapp"></i>
+    </button>
+
+    <!-- Admin Edit Modal (لوحة تحكم الخدمات والصور) -->
+    <div id="admin-modal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-md z-50 flex items-center justify-center hidden p-4">
+        <div class="bg-white rounded-3xl p-6 sm:p-8 max-w-4xl w-full shadow-2xl space-y-6 relative max-h-[90vh] flex flex-col border border-slate-200">
+            <!-- Modal Header -->
+            <div class="flex items-center justify-between pb-4 border-b border-slate-200">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-brand-dark text-brand-gold flex items-center justify-center text-lg">
+                        <i class="fa-solid fa-sliders"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold text-slate-900">لوحة إدارة الخدمات والفيجوال والصور</h3>
+                        <p class="text-xs text-slate-500 font-tajawal">قم بتعديل الصور، العناوين، الأوصاف، أو إضافة خدمات جديدة وتحديثها فوراً.</p>
+                    </div>
+                </div>
+                <button onclick="closeAdminModal()" class="text-slate-400 hover:text-slate-600 text-xl p-2">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <!-- Modal Action Buttons & Tabs -->
+            <div class="flex flex-wrap items-center justify-between gap-3 bg-slate-50 p-3 rounded-2xl border border-slate-200">
+                <button onclick="openAddNewServiceForm()" class="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs sm:text-sm rounded-xl transition flex items-center gap-2">
+                    <i class="fa-solid fa-plus"></i>
+                    <span>إضافة خدمة / منتج جديد</span>
+                </button>
+                <div class="flex items-center gap-2">
+                    <button onclick="resetDefaultServices()" class="px-3 py-2 bg-slate-200 hover:bg-slate-300 text-slate-700 font-semibold text-xs rounded-xl transition">
+                        استعادة الافتراضي
+                    </button>
+                    <button onclick="saveAdminChanges()" class="px-5 py-2 bg-brand-dark hover:bg-slate-800 text-brand-gold font-bold text-xs sm:text-sm rounded-xl transition flex items-center gap-2 shadow-md">
+                        <i class="fa-solid fa-floppy-disk"></i>
+                        <span>حفظ التعديلات</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Modal Content (Services Edit List / Add Form) -->
+            <div id="admin-modal-content" class="overflow-y-auto pr-1 space-y-4 flex-grow">
+                <!-- Dynamically Populated Forms -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Direct WhatsApp Phone Number Assigned as Requested
+        const WHATSAPP_PHONE = "966544613929";
+
+        // Initial Default Services List with Images and Details
+        const defaultServices = [
+            {
+                id: 1,
+                title: "تطوير المتاجر والمواقع الإلكترونية",
+                category: "tech",
+                icon: "fa-solid fa-code",
+                badge: "الأكثر طلباً",
+                image: "https://images.unsplash.com/photo-1547658719-da2b51169166?auto=format&fit=crop&w=600&q=80",
+                description: "تصميم وتطوير مواقع ومتاجر إلكترونية حديثة وسريعة ومتجاوبة تماماً مع الجوال والأجهزة الذكية مع ربط وسائل الدفع.",
+                priceHint: "حسب خصائص المشروع"
+            },
+            {
+                id: 2,
+                title: "إدارة الحملات الإعلانية المأجورة",
+                category: "marketing",
+                icon: "fa-solid fa-rectangle-ad",
+                badge: "عائد مرتفع",
+                image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=600&q=80",
+                description: "تخطيط وتنفيذ حملات تسويقية مستهدفة على منصات (Google, TikTok, Snapchat, Instagram) لتحقيق أعلى مبيعات.",
+                priceHint: "باقات إدارية شهرية"
+            },
+            {
+                id: 3,
+                title: "تصميم الهوية البصرية والمطبوعات",
+                category: "design",
+                icon: "fa-solid fa-palette",
+                badge: "إبداعي متكامل",
+                image: "https://images.unsplash.com/photo-1626785774573-4b799315345d?auto=format&fit=crop&w=600&q=80",
+                description: "ابتكار هويات بصرية متميزة تشمل الشعار، لوحة الألوان، الخطوط الرسمية، الكروت، وقوالب السوشيال ميديا.",
+                priceHint: "باقة الهوية الشاملة"
+            },
+            {
+                id: 4,
+                title: "نظام إدارة المبيعات والعملاء (CRM)",
+                category: "products",
+                icon: "fa-solid fa-boxes-stacked",
+                badge: "منتج جاهز",
+                image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=600&q=80",
+                description: "برنامج سحابي ذكي لإدارة حركة مبيعات المتاجر والشركات والمستودعات ومتابعة العملاء بسهولة.",
+                priceHint: "اشتراك دوري/سنوي"
+            },
+            {
+                id: 5,
+                title: "تطبيقات الجوال (iOS & Android)",
+                category: "tech",
+                icon: "fa-solid fa-mobile-screen-button",
+                badge: "أداء فائق",
+                image: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?auto=format&fit=crop&w=600&q=80",
+                description: "برمجة تطبيقات جوال حديثة وسريعة تتميز بتجربة مستخدم مريحة ولوحة تحكم شاملة لإدارة التطبيق.",
+                priceHint: "حسب الميزات المطلوبة"
+            },
+            {
+                id: 6,
+                title: "إدارة وتنمية حسابات التواصل الاجتماعي",
+                category: "marketing",
+                icon: "fa-solid fa-hashtag",
+                badge: "تفاعل مستمر",
+                image: "https://images.unsplash.com/photo-1611162617474-5b21e879e113?auto=format&fit=crop&w=600&q=80",
+                description: "صناعة محتوى إبداعي، كتابة المنشورات، التصاميم، والردود التفاعلية لزيادة المتابعين وبناء العلامة التجارية.",
+                priceHint: "باقات شهرية"
+            }
+        ];
+
+        let services = [];
+
+        // App Initialization
+        window.addEventListener('DOMContentLoaded', () => {
+            loadServicesData();
+            renderServices('all');
+        });
+
+        // Load Services Data from LocalStorage or Default
+        function loadServicesData() {
+            const stored = localStorage.getItem('shield_agency_services');
+            if (stored) {
+                try {
+                    services = JSON.parse(stored);
+                } catch(e) {
+                    services = [...defaultServices];
+                }
+            } else {
+                services = [...defaultServices];
+            }
+        }
+
+        // Render Services Cards to Grid
+        function renderServices(filterCategory = 'all') {
+            const grid = document.getElementById('services-grid');
+            grid.innerHTML = '';
+
+            const filtered = filterCategory === 'all' 
+                ? services 
+                : services.filter(s => s.category === filterCategory);
+
+            if (filtered.length === 0) {
+                grid.innerHTML = `
+                    <div class="col-span-full text-center py-12 bg-white rounded-3xl border border-slate-200">
+                        <i class="fa-solid fa-box-open text-4xl text-slate-300 mb-3"></i>
+                        <p class="text-slate-500 font-bold">لا توجد خدمات مضافة في هذا التصنيف حالياً.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            filtered.forEach(item => {
+                const card = document.createElement('div');
+                card.className = "bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-slate-200 flex flex-col justify-between group";
+
+                const imageUrl = item.image && item.image.trim() !== '' 
+                    ? item.image 
+                    : 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=600&q=80';
+
+                card.innerHTML = `
+                    <div>
+                        <!-- Service Image Container -->
+                        <div class="relative h-48 w-full overflow-hidden bg-slate-900">
+                            <img src="${imageUrl}" alt="${item.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-90 group-hover:opacity-100" onerror="this.src='https://placehold.co/600x400/121D38/FFFFFF?text=Shield+Agency'">
+                            <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent"></div>
+                            <span class="absolute top-4 right-4 px-3 py-1 rounded-full text-xs font-bold bg-brand-dark/90 text-brand-gold border border-brand-gold/30 backdrop-blur-md">
+                                ${item.badge || 'خدمة متميزة'}
+                            </span>
+                        </div>
+
+                        <!-- Service Details -->
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold text-slate-900 mb-2 group-hover:text-emerald-600 transition-colors">
+                                ${item.title}
+                            </h3>
+                            <p class="text-slate-600 text-sm font-tajawal leading-relaxed mb-4">
+                                ${item.description}
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Card Footer & Order Button -->
+                    <div class="px-6 pb-6 pt-2 border-t border-slate-100 flex items-center justify-between gap-3">
+                        <span class="text-xs font-bold text-slate-400">
+                            <i class="fa-solid fa-tag text-brand-gold ml-1"></i>${item.priceHint || 'حسب الطلب'}
+                        </span>
+
+                        <button onclick="orderServiceWhatsApp('${item.title}')" class="px-5 py-2.5 rounded-xl bg-brand-whatsapp hover:bg-emerald-600 text-white font-bold text-sm flex items-center gap-2 shadow-md shadow-emerald-500/20 transition duration-200 transform active:scale-95">
+                            <i class="fa-brands fa-whatsapp text-lg"></i>
+                            <span>اطلب الآن</span>
+                        </button>
+                    </div>
+                `;
+
+                grid.appendChild(card);
+            });
+        }
+
+        // WhatsApp Direct Order Action with Customized Text
+        function orderServiceWhatsApp(serviceTitle) {
+            const message = `السلام عليكم ورحمة الله وبركاته،\n\nأود طلب خدمة / منتج: *${serviceTitle}*\nمن وكالة درع الإبتكار، والرجاء إفادتي بالسعر والتفاصيل.`;
+            const encoded = encodeURIComponent(message);
+            window.open(`https://wa.me/${WHATSAPP_PHONE}?text=${encoded}`, '_blank');
+        }
+
+        // General WhatsApp Contact Button
+        function orderGeneralWhatsApp() {
+            const message = `السلام عليكم ورحمة الله، أود التواصل مع فريق وكالة درع الإبتكار لمعرفة تفاصيل الخدمات المتاحة وتلقي الاستشارات.`;
+            const encoded = encodeURIComponent(message);
+            window.open(`https://wa.me/${WHATSAPP_PHONE}?text=${encoded}`, '_blank');
+        }
+
+        // Filter Services Tabs
+        function filterServices(category) {
+            const buttons = document.querySelectorAll('#filter-tabs .filter-btn');
+            buttons.forEach(btn => {
+                if (btn.getAttribute('data-category') === category) {
+                    btn.className = "filter-btn active-tab px-6 py-2.5 rounded-xl font-bold text-sm transition-all duration-200 bg-brand-dark text-white shadow-md";
+                } else {
+                    btn.className = "filter-btn px-6 py-2.5 rounded-xl font-bold text-sm transition-all duration-200 bg-white text-slate-700 hover:bg-slate-200 shadow-sm";
+                }
+            });
+
+            renderServices(category);
+        }
+
+        // Open Admin Edit Modal and Render Items Form
+        function openAdminModal() {
+            renderAdminServiceList();
+            document.getElementById('admin-modal').classList.remove('hidden');
+        }
+
+        function closeAdminModal() {
+            document.getElementById('admin-modal').classList.add('hidden');
+        }
+
+        // Render Service Editor List inside Modal
+        function renderAdminServiceList() {
+            const container = document.getElementById('admin-modal-content');
+            container.innerHTML = '';
+
+            services.forEach((item, index) => {
+                const div = document.createElement('div');
+                div.className = "p-5 rounded-2xl bg-slate-50 border border-slate-200 space-y-4 relative group";
+
+                div.innerHTML = `
+                    <div class="flex items-center justify-between border-b border-slate-200 pb-3">
+                        <span class="font-extrabold text-sm text-slate-800">خدمة #${index + 1}: ${item.title}</span>
+                        <button onclick="deleteService(${item.id})" class="text-red-500 hover:text-red-700 text-xs font-bold px-3 py-1 rounded-lg bg-red-50 hover:bg-red-100 transition">
+                            <i class="fa-solid fa-trash-can ml-1"></i>حذف الخدمة
+                        </button>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 mb-1">اسم الخدمة / المنتج:</label>
+                            <input type="text" id="edit-title-${item.id}" value="${item.title}" class="w-full px-3 py-2 rounded-xl border border-slate-300 text-sm focus:ring-2 focus:ring-emerald-500 focus:outline-none">
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 mb-1">رابط الصورة (Image URL):</label>
+                            <input type="text" id="edit-image-${item.id}" value="${item.image || ''}" placeholder="https://example.com/image.jpg" class="w-full px-3 py-2 rounded-xl border border-slate-300 text-sm focus:ring-2 focus:ring-emerald-500 focus:outline-none font-mono" dir="ltr">
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 mb-1">التصنيف:</label>
+                            <select id="edit-category-${item.id}" class="w-full px-3 py-2 rounded-xl border border-slate-300 text-sm focus:ring-2 focus:ring-emerald-500 focus:outline-none">
+                                <option value="tech" ${item.category === 'tech' ? 'selected' : ''}>الحلول التقنية (tech)</option>
+                                <option value="marketing" ${item.category === 'marketing' ? 'selected' : ''}>التسويق الرقمي (marketing)</option>
+                                <option value="design" ${item.category === 'design' ? 'selected' : ''}>التصميم والهوية (design)</option>
+                                <option value="products" ${item.category === 'products' ? 'selected' : ''}>منتجات جاهزة (products)</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 mb-1">الشارة/الوسم (Badge):</label>
+                            <input type="text" id="edit-badge-${item.id}" value="${item.badge || ''}" placeholder="مثال: الأكثر طلباً" class="w-full px-3 py-2 rounded-xl border border-slate-300 text-sm focus:ring-2 focus:ring-emerald-500 focus:outline-none">
+                        </div>
+
+                        <div class="md:col-span-2">
+                            <label class="block text-xs font-bold text-slate-700 mb-1">الوصف:</label>
+                            <textarea id="edit-desc-${item.id}" rows="2" class="w-full px-3 py-2 rounded-xl border border-slate-300 text-sm focus:ring-2 focus:ring-emerald-500 focus:outline-none font-tajawal">${item.description}</textarea>
+                        </div>
+                    </div>
+                `;
+
+                container.appendChild(div);
+            });
+        }
+
+        // Add New Service Form Modal Action
+        function openAddNewServiceForm() {
+            const newId = Date.now();
+            const newService = {
+                id: newId,
+                title: "خدمة جديدة إبداعية",
+                category: "tech",
+                badge: "جديد",
+                image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=600&q=80",
+                description: "اكتب وصفاً مفصلاً ومميزاً للخدمة أو المنتج الجديد هنا.",
+                priceHint: "حسب الاتفاق"
+            };
+
+            services.unshift(newService);
+            renderAdminServiceList();
+        }
+
+        // Delete Service
+        function deleteService(id) {
+            if (confirm("هل أنت تأكد من حذف هذه الخدمة؟")) {
+                services = services.filter(s => s.id !== id);
+                renderAdminServiceList();
+            }
+        }
+
+        // Save Admin Modifications to LocalStorage & Update Page
+        function saveAdminChanges() {
+            services.forEach(item => {
+                const titleEl = document.getElementById(`edit-title-${item.id}`);
+                const imageEl = document.getElementById(`edit-image-${item.id}`);
+                const categoryEl = document.getElementById(`edit-category-${item.id}`);
+                const badgeEl = document.getElementById(`edit-badge-${item.id}`);
+                const descEl = document.getElementById(`edit-desc-${item.id}`);
+
+                if (titleEl) item.title = titleEl.value.trim();
+                if (imageEl) item.image = imageEl.value.trim();
+                if (categoryEl) item.category = categoryEl.value;
+                if (badgeEl) item.badge = badgeEl.value.trim();
+                if (descEl) item.description = descEl.value.trim();
+            });
+
+            localStorage.setItem('shield_agency_services', JSON.stringify(services));
+            renderServices('all');
+            closeAdminModal();
+            alert('تم حفظ كافة التعديلات والتغييرات بنجاح!');
+        }
+
+        // Reset to Default Initial Services
+        function resetDefaultServices() {
+            if (confirm("هل تريد استعادة قائمة الخدمات والتمثيل الافتراضي الأولي؟")) {
+                services = JSON.parse(JSON.stringify(defaultServices));
+                localStorage.removeItem('shield_agency_services');
+                renderAdminServiceList();
+                renderServices('all');
+            }
+        }
+
+        // FAQ Toggle Logic
+        function toggleFaq(element) {
+            const text = element.querySelector('p');
+            const icon = element.querySelector('i');
+            if (text.classList.contains('hidden')) {
+                text.classList.remove('hidden');
+                icon.style.transform = 'rotate(180deg)';
+            } else {
+                text.classList.add('hidden');
+                icon.style.transform = 'rotate(0deg)';
+            }
+        }
+
+        // Mobile Menu Toggle
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+    </script>
+</body>
+</html>
